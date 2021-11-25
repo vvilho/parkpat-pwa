@@ -24,9 +24,40 @@ import './LandingPage.css';
 import {isSunsetTrue, SunsetChecker} from "../components/SunsetChecker/SunsetChecker";
 import BeenHereBeforeModal from "../components/BeenHereBeforeModal/BeenHereBeforeModal";
 import defaultState from "./defaultState";
+import "@fontsource/heebo";
+import "@fontsource/roboto";
 
 
-let theme = createTheme();
+let theme = createTheme({
+    typography: {
+        h1: {
+            fontFamily: "Heebo",
+        },
+        h2: {
+            fontFamily: "Heebo",
+        },
+        h3: {
+            fontFamily: "Heebo",
+        },
+        h4: {
+            fontFamily: "Heebo",
+        },
+        h5: {
+            fontFamily: "Heebo",
+        },
+        h6: {
+            fontFamily: "Heebo",
+        },
+        h7: {
+          fontFamily: 'Roboto',
+        },
+        button:{
+            fontFamily: "Heebo",
+        },
+        fontFamily: "Roboto",
+    }
+});
+
 theme = responsiveFontSizes(theme);
 
 const LandingPage = () => {
@@ -161,7 +192,6 @@ const LandingPage = () => {
                                                 <Box>
                                                     <Typography variant="h5"
                                                                 fontWeight={'bold'}
-                                                                fontFamily={'IBM Plex Mono'}
                                                                 id='invaSpacesTitle'>Parkkipaikat</Typography>
                                                     <Typography variant="h7" id='freeSpacesText'
                                                     >{freeSpacesText?.text}</Typography>
@@ -189,7 +219,6 @@ const LandingPage = () => {
                                                 <Box>
                                                     <Typography variant="h5"
                                                                 fontWeight={'bold'}
-                                                                fontFamily={'IBM Plex Mono'}
                                                                 id='invaSpacesTitle'>Invapaikat</Typography>
                                                     <Typography variant="h7" id='invaSpacesText'
                                                     >{invaSpacesText?.text}</Typography>
