@@ -26,6 +26,7 @@ import BeenHereBeforeModal from "../components/BeenHereBeforeModal/BeenHereBefor
 import defaultState from "./defaultState";
 import "@fontsource/heebo";
 import "@fontsource/roboto";
+import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 
 
 let theme = createTheme({
@@ -75,6 +76,7 @@ const LandingPage = () => {
     const [sunrise, setSunrise] = useState();
     const [timeNow, setTimeNow] = useState();
     const [sunHasSet, setSunHasSet] = useState(false);
+    const [online, setOnline] = useState(true);
 
 
 
@@ -175,9 +177,11 @@ const LandingPage = () => {
                 },
             );
             setParkingState(newObj);
+            setOnline(true);
         } catch (err) {
             // Tänne fetchaus virheet
             console.log('asyncFetch error', err.message);
+            setOnline(false);
         }
     };
 
@@ -195,14 +199,16 @@ const LandingPage = () => {
     return (
         <Container id={'container'} disableGutters={screenWidth} maxWidth={'md'}
                    style={{display: 'flex', width: '100vw', height: '100vh'}}>
+            <img src={'/giphy.gif'} style={{display: 'none'}}/>
             <ThemeProvider theme={theme}>
                 <BeenHereBeforeModal/>
                 {sunHasSet ? <SunsetChecker sunriseUnix={sunrise}/> :
                     <>
                         <Grid container>
                             <Grid item sm={6}>
-                                <Card elevation={5} id={'svgParkMapCard'}>
+                                <Card elevation={5} id={'svgParkMapCard'} style={{position: 'relative'}}>
                                     <SvgParkMap object={parkingState}/>
+                                    <ErrorMessage online={online}/>
                                 </Card>
                             </Grid>
                             <Grid item sm={6}>
@@ -211,12 +217,12 @@ const LandingPage = () => {
                                         <Stack direction={'row'} justifyContent={'space-between'}
                                                alignItems={'self-end'} margin={'0 1rem'}>
                                             <Typography variant="h7">Vapaat paikat
-                                                ({totalFreeSpaces})</Typography>
+                                                ({online ? totalFreeSpaces : '?'})</Typography>
                                             <Box display={'flex'} alignItems={'self-end'}
                                                  width={'6rem'} justifyContent={'end'}>
                                                 <AccessTimeIcon/>
-                                                <Typography variant={'h7'} id={'clock'}>{<Clock
-                                                    hour12={false}/>}</Typography>
+                                                <Typography variant={'h7'} id={'clock'}>
+                                                    {online ? <Clock hour12={false}/> : '?'}</Typography>
                                             </Box>
                                         </Stack>
                                     </Grid>
@@ -235,14 +241,14 @@ const LandingPage = () => {
                                                                 fontWeight={'bold'}
                                                                 id='invaSpacesTitle'>Parkkipaikat</Typography>
                                                     <Typography variant="h7" id='freeSpacesText'
-                                                    >{freeSpacesText?.text}</Typography>
+                                                    >{online ? freeSpacesText?.text : '-'}</Typography>
                                                 </Box>
                                             </Stack>
 
                                             <Box display={'flex'} alignItems={'flex-end'}>
                                                 <Typography variant="h2"
-                                                            color={freeSpacesText?.style}
-                                                            id='freeSpacesNumber'>{freeNormalSpaces}</Typography>
+                                                            color={online ? freeSpacesText?.style : 'black'}
+                                                            id='freeSpacesNumber'>{online ? freeNormalSpaces : '?'}</Typography>
                                             </Box>
                                         </Stack>
                                         <Divider variant={screenWidth ? 'fullWidth' : 'middle'}/>
@@ -262,13 +268,13 @@ const LandingPage = () => {
                                                                 fontWeight={'bold'}
                                                                 id='invaSpacesTitle'>Invapaikat</Typography>
                                                     <Typography variant="h7" id='invaSpacesText'
-                                                    >{invaSpacesText?.text}</Typography>
+                                                    >{online ? invaSpacesText?.text : '-'}</Typography>
                                                 </Box>
                                             </Stack>
                                             <Box display={'flex'} alignItems={'flex-end'}>
                                                 <Typography variant="h2"
-                                                            color={invaSpacesText?.style}
-                                                            id='invaSpacesNumber'>{freeInvaSpaces}</Typography>
+                                                            color={online ? invaSpacesText?.style : 'black'}
+                                                            id='invaSpacesNumber'>{online ? freeInvaSpaces : '?'}</Typography>
                                             </Box>
                                         </Stack>
                                         <Divider variant={screenWidth ? 'fullWidth' : 'middle'}/>
