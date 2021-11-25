@@ -1,0 +1,70 @@
+#svgParkMapCard{
+    border-radius: 0;
+}
+#modalBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: white;
+    border: 2px solid #000;
+    box-shadow: 0 11px 15px -7px rgba(0 0 0 0.2), 0 24px 38px 3px rgba(0 0 0 0.14), 0 9px 46px 8px rgba(0 0 0 0.12);
+    border-radius: 0.5rem;
+    padding: 4px;
+}
+#parkContentGridContainer{
+    margin-top: 0;
+}
+#parkContentGridItem{
+    margin-top: 0;
+}
+#freeSpacesNumber{
+    line-height: 2.8rem;
+}
+
+#clock span{
+        color: black;
+}
+
+#invaSpacesNumber{
+    line-height: 2.8rem;
+}
+#container{
+    align-items: center;
+}
+@media screen and (min-width: 600px) {
+    #modalBox{
+        width: 40%;
+    }
+}
+@media screen and (max-width: 599px) {
+    #container{
+        align-items: unset;
+    }
+    #svgParkMapCard{
+        width: 100vw;
+        border-radius: 0 0 50px 50px;
+        overflow: hidden;
+    }
+    #parkContentGridContainer{
+        margin: 1rem 0 2rem 0;
+    }
+    #parkContentGridItem{
+        margin: 1rem 0 0 0;
+    }
+    #freeSpacesNumber{
+        line-height: 2.2rem;
+    }
+    #invaSpacesNumber{
+        line-height: 2.2rem;
+    }
+}
+@media screen and (max-width: 680px) and (min-width: 600px) {
+    #invaSpacesText{
+        font-size: 0.86rem;
+    }
+    #freeSpacesText{
+        font-size: 0.86rem;
+    }
+}
