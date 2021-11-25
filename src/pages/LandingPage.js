@@ -26,6 +26,8 @@ import BeenHereBeforeModal from "../components/BeenHereBeforeModal/BeenHereBefor
 import defaultState from "./defaultState";
 import "@fontsource/heebo";
 import "@fontsource/roboto";
+import ActiveTimeTracker
+    from '../components/ActiveTimeTracker/ActiveTimeTracker';
 
 
 let theme = createTheme({
@@ -68,7 +70,7 @@ const LandingPage = () => {
     const [freeSpacesText, setFreeSpacesText] = useState({});
     const [freeInvaSpaces, setFreeInvaSpaces] = useState(0);
     const [invaSpacesText, setInvaSpacesText] = useState({});
-    const [screenWidth, setScreenWidth] = useState(true);
+    const [isMobile, setIsMobile] = useState(true);
     const [freeNormalSpaces, setFreeNormalSpaces] = useState(0);
     const [loading, setLoading] = useState(true);
     const [sunset, setSunset] = useState();
@@ -90,7 +92,7 @@ const LandingPage = () => {
         const width = window.innerWidth;
 
         if (width > 599) {
-            setScreenWidth(false);
+            setIsMobile(false);
         }
     }, []);
 
@@ -193,7 +195,7 @@ const LandingPage = () => {
     }
 
     return (
-        <Container id={'container'} disableGutters={screenWidth} maxWidth={'md'}
+        <Container id={'container'} disableGutters={isMobile} maxWidth={'md'}
                    style={{display: 'flex', width: '100vw', height: '100vh'}}>
             <ThemeProvider theme={theme}>
                 <BeenHereBeforeModal/>
@@ -205,6 +207,7 @@ const LandingPage = () => {
                                     <SvgParkMap object={parkingState}/>
                                 </Card>
                             </Grid>
+                            {isMobile && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/> }
                             <Grid item sm={6}>
                                 <Grid container id={'parkContentGridContainer'}>
                                     <Grid item xs={12} id={'parkContentGridItem'}>
@@ -245,7 +248,7 @@ const LandingPage = () => {
                                                             id='freeSpacesNumber'>{freeNormalSpaces}</Typography>
                                             </Box>
                                         </Stack>
-                                        <Divider variant={screenWidth ? 'fullWidth' : 'middle'}/>
+                                        <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                                     </Grid>
                                     <Grid item xs={12} margin={'1rem 0'}>
                                         <Stack direction={'row'} justifyContent={'space-between'}
@@ -271,9 +274,10 @@ const LandingPage = () => {
                                                             id='invaSpacesNumber'>{freeInvaSpaces}</Typography>
                                             </Box>
                                         </Stack>
-                                        <Divider variant={screenWidth ? 'fullWidth' : 'middle'}/>
+                                        <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                                     </Grid>
                                 </Grid>
+                                {!isMobile && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/> }
                             </Grid>
                         </Grid>
                     </>
