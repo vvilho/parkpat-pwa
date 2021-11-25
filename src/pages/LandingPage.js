@@ -19,7 +19,7 @@ import AccessibleIcon from '@mui/icons-material/Accessible';
 import logo from './ParkkiPate-logo-retina-header.jpeg';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Loader from '../components/Loader/Loader';
+
 import './LandingPage.css';
 import {isSunsetTrue, SunsetChecker} from "../components/SunsetChecker/SunsetChecker";
 import BeenHereBeforeModal from "../components/BeenHereBeforeModal/BeenHereBeforeModal";
@@ -39,7 +39,7 @@ const LandingPage = () => {
     const [invaSpacesText, setInvaSpacesText] = useState({});
     const [screenWidth, setScreenWidth] = useState(true);
     const [freeNormalSpaces, setFreeNormalSpaces] = useState(0);
-    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         asyncFetch();
