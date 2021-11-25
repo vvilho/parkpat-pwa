@@ -28,46 +28,9 @@ const useStyles = makeStyles({
 });
 
 
-
-
-const isSunsetTrue = () => {
-    return false
-}
-
-
-const SunsetChecker = () => {
+const SunsetChecker = (props) => {
     const classes = useStyles();
 
-    const [sunset, setSunset] = useState();
-    const [sunrise, setSunrise] = useState();
-    const [timeNow, setTimeNow] = useState();
-
-
-    useEffect(() => {
-        const timerInterval = setInterval(() => {
-            setTimeNow(Date.now());
-            console.log('on yli auringonlaskun', timeNow,sunset)
-
-            if (timeNow - sunset >= 0) {
-                console.log('on yli auringonlaskun', timeNow,sunset)
-            }
-        }, 5000);
-
-        return () => clearInterval(timerInterval);
-    }, [])
-
-
-    const fetchSunset = async () => {
-        const response = await fetch('/data/sunsetInfo.json');
-        const responseData = await response.json();
-        console.log(responseData);
-        setSunset(responseData.sunset);
-        setSunrise(responseData.sunrise);
-    }
-
-    useEffect(() => {
-        fetchSunset();
-    }, []);
 
 
     return (
@@ -84,7 +47,7 @@ const SunsetChecker = () => {
                     </Grid>
                     <Grid item>
                         <Typography variant={'h6'}>Nähdään taas huomenna kello {<Moment
-                            unix>{sunrise}</Moment>}. </Typography>
+                            unix>{props.sunriseUnix}</Moment>}. </Typography>
                     </Grid>
 
 
@@ -97,4 +60,4 @@ const SunsetChecker = () => {
 }
 
 
-export {SunsetChecker, isSunsetTrue};
+export default SunsetChecker;

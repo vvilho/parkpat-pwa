@@ -21,7 +21,7 @@ import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import './LandingPage.css';
-import {isSunsetTrue, SunsetChecker} from "../components/SunsetChecker/SunsetChecker";
+import SunsetChecker from "../components/SunsetChecker/SunsetChecker";
 import BeenHereBeforeModal from "../components/BeenHereBeforeModal/BeenHereBeforeModal";
 import defaultState from "./defaultState";
 import "@fontsource/heebo";
@@ -70,10 +70,23 @@ const LandingPage = () => {
     const [invaSpacesText, setInvaSpacesText] = useState({});
     const [screenWidth, setScreenWidth] = useState(true);
     const [freeNormalSpaces, setFreeNormalSpaces] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [sunset, setSunset] = useState();
+    const [sunrise, setSunrise] = useState();
+    const [timeNow, setTimeNow] = useState();
+    const [sunHasSet, setSunHasSet] = useState(false);
 
 
+
+
+
+    // Initial call for fetch functions
     useEffect(() => {
         asyncFetch();
+        fetchSunset();
+        setTimeNow(Date.now()/1000);
+
+
         const width = window.innerWidth;
 
         if (width > 599) {
@@ -121,15 +134,33 @@ const LandingPage = () => {
 
     }, [freeInvaSpaces, parkingState]);
 
+
+    // Every 5 seconds fetch parking data and set time now to state
     useEffect(() => {
 
         const timerInterval = setInterval(() => {
             asyncFetch();
+            setTimeNow(Date.now()/1000);
+
         }, 5000);
 
         return () => clearInterval(timerInterval);
     }, []);
 
+    // Check if sun has set
+    useEffect(()=> {
+
+
+        if (timeNow - sunset >= 0 && timeNow>= sunrise) {
+            setSunHasSet(true);
+        }else{
+            setSunHasSet(false)
+        }
+
+    },[timeNow, sunset])
+
+
+    // Fetch parking data
     const asyncFetch = async () => {
         let data = {};
 
@@ -150,13 +181,23 @@ const LandingPage = () => {
         }
     };
 
+    // Fetch sunset data
+    const fetchSunset = async () => {
+        const response = await fetch('/data/sunsetInfo.json');
+        const responseData = await response.json();
+        console.log('koira',responseData);
+
+        setSunset(responseData?.sunset);
+        setSunrise(responseData?.sunrise);
+
+    }
 
     return (
         <Container id={'container'} disableGutters={screenWidth} maxWidth={'md'}
                    style={{display: 'flex', width: '100vw', height: '100vh'}}>
             <ThemeProvider theme={theme}>
                 <BeenHereBeforeModal/>
-                {isSunsetTrue() ? <SunsetChecker/> :
+                {sunHasSet ? <SunsetChecker sunriseUnix={sunrise}/> :
                     <>
                         <Grid container>
                             <Grid item sm={6}>
