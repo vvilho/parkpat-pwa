@@ -16,7 +16,6 @@ import {
 import SvgParkMap from '../components/SvgParkMap/SvgParkMap';
 import Clock from 'react-digital-clock';
 import AccessibleIcon from '@mui/icons-material/Accessible';
-import logo from './ParkkiPate-logo-retina-header.jpeg';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
