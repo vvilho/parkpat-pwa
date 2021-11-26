@@ -89,6 +89,8 @@ const LandingPage = () => {
         const [sunrise, setSunrise] = useState();
         const [timeNow, setTimeNow] = useState();
         const [sunHasSet, setSunHasSet] = useState(false);
+        const [isMobile, setIsMobile] = useState(false);
+        const [online, setOnline] = useState(true);
 
 
         // Initial call for fetch functions
@@ -295,10 +297,10 @@ const LandingPage = () => {
                                         <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                                     </Grid>
                                 </Grid>
-                                {!isMobile && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/> }
+                                {(!isMobile && sunsetFuncOn) && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/>}
                             </Grid>
                         </Grid>
-                    </>
+                    </>     
 
                 </ThemeProvider>
             </Container>
