@@ -147,19 +147,18 @@ const LandingPage = () => {
 
 
         // Every 5 seconds fetch parking data and set time now to state #sunsetfunc
-        //
-        //
+
+        useEffect(() => {
+
+            const timerInterval = setInterval(() => {
+                asyncFetch();
+                if(sunsetFuncOn) setTimeNow(Date.now()/1000);
+
+            }, 5000);
+
+            return () => clearInterval(timerInterval);
+        }, []);
         // <-----------uncomment these to make sunset functionality work------------>
-        // useEffect(() => {
-        //
-        //     const timerInterval = setInterval(() => {
-        //         asyncFetch();
-        //         if(sunsetFuncOn) setTimeNow(Date.now()/1000);
-        //
-        //     }, 5000);
-        //
-        //     return () => clearInterval(timerInterval);
-        // }, []);
 
         // Check if sun has set
 
