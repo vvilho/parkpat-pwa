@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import {ReactComponent as SunsetSvg} from './sunset.svg';
 import './sunset.css'
-
+import "@fontsource/heebo";
 
 Moment.globalFormat = 'HH:mm';
 Moment.globalTimezone = "Europe/Helsinki";
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
     typography: {
         root: {
-            fontFamily: 'IBM Plex Mono !important',
+            fontFamily: 'Heebo',
         }
     }
 
