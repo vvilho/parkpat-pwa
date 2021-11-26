@@ -84,7 +84,6 @@ const LandingPage = () => {
         const [invaSpacesText, setInvaSpacesText] = useState({});
         const [screenWidth, setScreenWidth] = useState(true);
         const [freeNormalSpaces, setFreeNormalSpaces] = useState(0);
-        const [loading, setLoading] = useState(true);
         const [sunset, setSunset] = useState();
         const [sunrise, setSunrise] = useState();
         const [timeNow, setTimeNow] = useState();
@@ -300,7 +299,7 @@ const LandingPage = () => {
                                 {(!isMobile && sunsetFuncOn) && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/>}
                             </Grid>
                         </Grid>
-                    </>     
+                    </>
 
                 </ThemeProvider>
             </Container>
