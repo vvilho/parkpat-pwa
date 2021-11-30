@@ -1,5 +1,4 @@
 import {Box, Button, Grid, Modal, Typography} from "@mui/material";
-import logo from "../../pages/ParkkiPate-logo-retina-header.jpeg";
 import React, {useEffect, useState} from "react";
 
 const BeenHereBeforeModal = () => {
@@ -28,10 +27,10 @@ const BeenHereBeforeModal = () => {
             <Box id={'modalBox'}>
                 <Grid container direction={'row'} textAlign={'center'}>
                     <Grid item xs={12} paddingTop={'1rem'}>
-                        <img src={'/alarm.png'} width={'50%'} alt={'Picture of a alarm'}/>
+                        <img src={'/alarm.webp'} width={'50%'} alt={'Picture of a alarm'}/>
                     </Grid>
                     <Grid item xs={12} style={{paddingBottom: '1rem'}}>
-                        <Typography id="modal-modal-description"
+                        <Typography variant={'body1'} id="modal-modal-description"
                                     sx={{mt: 2, padding: '1rem'}}
                                     fontWeight={'bold'}>
 
@@ -41,7 +40,7 @@ const BeenHereBeforeModal = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <img src={logo} alt={'Parkkipate logo'} width={'50%'}/>
+                        <img src={'/parkkipate_logo.webp'} alt={'Parkkipate logo'} width={'50%'}/>
                     </Grid>
                     <Grid item marginTop={'1rem'} xs={12}>
                         <Button variant="contained" fullWidth={true}

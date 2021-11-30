@@ -1,5 +1,6 @@
 #svgParkMapCard{
     border-radius: 0;
+    margin-bottom: 1rem;
 }
 #modalBox{
     position: absolute;
@@ -36,6 +37,10 @@
 @media screen and (min-width: 600px) {
     #modalBox{
         width: 40%;
+
+    }
+    #container{
+        display: flex;
     }
 }
 @media screen and (max-width: 599px) {
@@ -48,7 +53,7 @@
         overflow: hidden;
     }
     #parkContentGridContainer{
-        margin: 1rem 0 2rem 0;
+        margin: 0 0 2rem 0;
     }
     #parkContentGridItem{
         margin: 1rem 0 0 0;

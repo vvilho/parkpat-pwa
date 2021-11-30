@@ -10,15 +10,15 @@ import {
     ThemeProvider,
     Typography,
     Divider,
-    Card,
+    Card, createStyles, Skeleton,
 } from '@mui/material';
 
 import SvgParkMap from '../components/SvgParkMap/SvgParkMap';
 import Clock from 'react-digital-clock';
 import AccessibleIcon from '@mui/icons-material/Accessible';
-import logo from './ParkkiPate-logo-retina-header.jpeg';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 import './LandingPage.css';
 import SunsetChecker from "../components/SunsetChecker/SunsetChecker";
@@ -29,6 +29,7 @@ import "@fontsource/roboto";
 import ActiveTimeTracker
     from '../components/ActiveTimeTracker/ActiveTimeTracker';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
+import {makeStyles} from '@mui/styles';
 
 
 let theme = createTheme({
@@ -60,10 +61,27 @@ let theme = createTheme({
         fontFamily: "Roboto",
     }
 });
+const useStyles = makeStyles(() =>
+    createStyles({
+        rotateIcon: {
+            animation: "$spin 2s linear infinite"
+        },
+        "@keyframes spin": {
+            "0%": {
+                transform: "rotate(0deg)"
+            },
+            "100%": {
+                transform: "rotate(360deg)"
+            }
+        }
+    })
+);
 
 theme = responsiveFontSizes(theme);
 
 const LandingPage = () => {
+        const classes = useStyles();
+
         /**
          * if you want to put on 'app off after sunset'-functionality, set variable "sunsetFuncOn" true
          * also add conditional rendering with variable 'sunHasSet'
@@ -90,6 +108,7 @@ const LandingPage = () => {
         const [sunHasSet, setSunHasSet] = useState(false);
         const [isMobile, setIsMobile] = useState(false);
         const [online, setOnline] = useState(true);
+        const [isForceFetching, setIsForceFetching] = useState(false)
 
 
         // Initial call for fetch functions
@@ -147,20 +166,24 @@ const LandingPage = () => {
         }, [freeInvaSpaces, parkingState]);
 
 
+        useEffect(() => {
+        }, [online])
+
+
+
         // Every 5 seconds fetch parking data and set time now to state #sunsetfunc
-        //
-        //
+
+        useEffect(() => {
+
+            const timerInterval = setInterval(() => {
+                asyncFetch();
+                if (sunsetFuncOn) setTimeNow(Date.now() / 1000);
+
+            }, 5000);
+
+            return () => clearInterval(timerInterval);
+        }, []);
         // <-----------uncomment these to make sunset functionality work------------>
-        // useEffect(() => {
-        //
-        //     const timerInterval = setInterval(() => {
-        //         asyncFetch();
-        //         if(sunsetFuncOn) setTimeNow(Date.now()/1000);
-        //
-        //     }, 5000);
-        //
-        //     return () => clearInterval(timerInterval);
-        // }, []);
 
         // Check if sun has set
 
@@ -176,9 +199,9 @@ const LandingPage = () => {
         // }, [timeNow, sunset])
         // <------------------------^^^^-------------------------------------------->
 
+        let count = 0
 
-
-    // Fetch parking data
+        // Fetch parking data
         const asyncFetch = async () => {
             let data = {};
 
@@ -193,12 +216,19 @@ const LandingPage = () => {
                     },
                 );
                 setParkingState(newObj);
+                setOnline(true);
+                count = 0;
+
             } catch (err) {
                 // Tänne fetchaus virheet
                 console.log('asyncFetch error', err.message);
-                setOnline(false);
+
+                count++;
+                if (count === 3) setOnline(false);
+
             }
         };
+
 
         // Fetch sunset data
 
@@ -212,91 +242,110 @@ const LandingPage = () => {
         }
 
 
+        const forcedReloadOfPlaces = () => {
+            setIsForceFetching(true)
+            asyncFetch();
+            setTimeout(() => {
+                setIsForceFetching(false)
+            }, 1000);
+        }
+
+
         return (
             <Container id={'container'} disableGutters={screenWidth} maxWidth={'md'}
-                       style={{display: 'flex', width: '100vw', height: '100vh'}}>
-                           <img src={'/giphy.gif'} style={{display: 'none'}}/>
+                       style={{ width: '100vw', height: '100vh'}}>
+                <img src={'/giphy.gif'} style={{display: 'none'}}/>
                 <ThemeProvider theme={theme}>
                     <BeenHereBeforeModal/>
                     <>
                         <Grid container>
-                            <Grid item sm={6}>
+                            <Grid item sm={6} height={"fit-content"}>
                                 <Card elevation={5} id={'svgParkMapCard'} style={{position: 'relative'}}>
                                     <SvgParkMap object={parkingState}/>
                                     <ErrorMessage online={online}/>
                                 </Card>
                             </Grid>
-                            {isMobile && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/> }
-                            <Grid item sm={6}>
-                                <Grid container id={'parkContentGridContainer'}>
+                            {isMobile && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/>}
+                            <Grid item sm={6} >
+                                <Grid container id={'parkContentGridContainer'} minWidth={'100%'}>
                                     <Grid item xs={12} id={'parkContentGridItem'}>
                                         <Stack direction={'row'} justifyContent={'space-between'}
                                                alignItems={'self-end'} margin={'0 1rem'}>
                                             <Typography variant="h7">Vapaat paikat
                                                 ({online ? totalFreeSpaces : '?'})</Typography>
+
                                             <Box display={'flex'} alignItems={'self-end'}
                                                  width={'6rem'} justifyContent={'end'}>
-                                                <AccessTimeIcon/>
-                                                <Typography variant={'h7'} id={'clock'}>
-                                                    {online ? <Clock hour12={false}/> : '?'}</Typography>
-                                            </Box>
-                                        </Stack>
-                                    </Grid>
-                                    <Grid item xs={12} margin={'1rem 0 0 0'}>
-                                        <Stack direction={'row'} justifyContent={'space-between'}
-                                               textAlign={'left'} margin={'0 1rem 1rem 1rem'}>
-                                            <Stack direction={'row'} alignItems={'flex-end'}>
-                                                <LocalParkingIcon sx={{
-                                                    fontSize: '47.875px',
-                                                    backgroundColor: '#2962ff',
-                                                    color: 'white',
-                                                    marginRight: '0.5rem',
-                                                }}/>
-                                                <Box>
-                                                    <Typography variant="h5"
-                                                                fontWeight={'bold'}
-                                                                id='invaSpacesTitle'>Parkkipaikat</Typography>
-                                                    <Typography variant="h7" id='freeSpacesText'
-                                                    >{online ? freeSpacesText?.text : '-'}</Typography>
-                                                </Box>
-                                            </Stack>
 
-                                            <Box display={'flex'} alignItems={'flex-end'}>
-                                                <Typography variant="h2"
-                                                            color={online ? freeSpacesText?.style : 'black'}
-                                                            id='freeSpacesNumber'>{online ? freeNormalSpaces : '?'}</Typography>
+
+                                                {isForceFetching ? <Box height={24}><AutorenewIcon
+
+                                                    className={isForceFetching ? classes.rotateIcon : ''}/></Box> : <AccessTimeIcon/>}
+                                                <Typography variant={'h7'} id={'clock'} onClick={forcedReloadOfPlaces}>
+                                                    {online ? <Clock hour12={false}/> : '?'}</Typography>
+
                                             </Box>
                                         </Stack>
-                                        <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                                     </Grid>
-                                    <Grid item xs={12} margin={'1rem 0'}>
-                                        <Stack direction={'row'} justifyContent={'space-between'}
-                                               textAlign={'left'} margin={'0 1rem 1rem 1rem'}>
-                                            <Stack direction={'row'} alignItems={'flex-end'}>
-                                                <AccessibleIcon sx={{
-                                                    fontSize: '47.875px',
-                                                    backgroundColor: '#2962ff',
-                                                    color: 'white',
-                                                    marginRight: '0.5rem',
-                                                }}/>
-                                                <Box>
-                                                    <Typography variant="h5"
-                                                                fontWeight={'bold'}
-                                                                id='invaSpacesTitle'>Invapaikat</Typography>
-                                                    <Typography variant="h7" id='invaSpacesText'
-                                                    >{online ? invaSpacesText?.text : '-'}</Typography>
-                                                </Box>
-                                            </Stack>
-                                            <Box display={'flex'} alignItems={'flex-end'}>
-                                                <Typography variant="h2"
-                                                            color={online ? invaSpacesText?.style : 'black'}
-                                                            id='invaSpacesNumber'>{online ? freeInvaSpaces : '?'}</Typography>
-                                            </Box>
-                                        </Stack>
-                                        <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
-                                    </Grid>
+                                        <Grid container width={'100%'}>
+                                            <Grid item xs={12} margin={'1rem 0 0 0'}>
+                                                <Stack direction={'row'} justifyContent={'space-between'}
+                                                       textAlign={'left'} margin={'0 1rem 1rem 1rem'}>
+                                                    <Stack direction={'row'} alignItems={'flex-end'}>
+                                                        <LocalParkingIcon sx={{
+                                                            fontSize: '47.875px',
+                                                            backgroundColor: '#2962ff',
+                                                            color: 'white',
+                                                            marginRight: '0.5rem',
+                                                        }}/>
+                                                        <Box>
+                                                            <Typography variant="h5"
+                                                                        fontWeight={'bold'}
+                                                                        id='invaSpacesTitle'>Parkkipaikat</Typography>
+                                                            <Typography variant="h7" id='freeSpacesText'
+                                                            >{online ? freeSpacesText?.text : '-'}</Typography>
+                                                        </Box>
+                                                    </Stack>
+
+                                                    <Box display={'flex'} alignItems={'flex-end'}>
+                                                        <Typography variant="h2"
+                                                                    color={online ? freeSpacesText?.style : 'black'}
+                                                                    id='freeSpacesNumber'>{online ? freeNormalSpaces : '?'}</Typography>
+                                                    </Box>
+                                                </Stack>
+                                                <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
+                                            </Grid>
+                                            <Grid item xs={12} margin={'1rem 0'}>
+                                                <Stack direction={'row'} justifyContent={'space-between'}
+                                                       textAlign={'left'} margin={'0 1rem 1rem 1rem'}>
+                                                    <Stack direction={'row'} alignItems={'flex-end'}>
+                                                        <AccessibleIcon sx={{
+                                                            fontSize: '47.875px',
+                                                            backgroundColor: '#2962ff',
+                                                            color: 'white',
+                                                            marginRight: '0.5rem',
+                                                        }}/>
+                                                        <Box>
+                                                            <Typography variant="h5"
+                                                                        fontWeight={'bold'}
+                                                                        id='invaSpacesTitle'>Invapaikat</Typography>
+                                                            <Typography variant="h7" id='invaSpacesText'
+                                                            >{online ? invaSpacesText?.text : '-'}</Typography>
+                                                        </Box>
+                                                    </Stack>
+                                                    <Box display={'flex'} alignItems={'flex-end'}>
+                                                        <Typography variant="h2"
+                                                                    color={online ? invaSpacesText?.style : 'black'}
+                                                                    id='invaSpacesNumber'>{online ? freeInvaSpaces : '?'}</Typography>
+                                                    </Box>
+                                                </Stack>
+                                                <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
+                                            </Grid>
+                                        </Grid>
                                 </Grid>
-                                {(!isMobile && sunsetFuncOn) && <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/>}
+
+                                {(!isMobile && sunsetFuncOn) &&
+                                <ActiveTimeTracker sunset={sunset} sunrise={sunrise} isMobile={isMobile}/>}
                             </Grid>
                         </Grid>
                     </>
