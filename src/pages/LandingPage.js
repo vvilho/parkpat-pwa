@@ -166,13 +166,11 @@ const LandingPage = () => {
         }, [freeInvaSpaces, parkingState]);
 
 
-<<<<<<< Updated upstream
-=======
         useEffect(() => {
         }, [online])
 
 
->>>>>>> Stashed changes
+
         // Every 5 seconds fetch parking data and set time now to state #sunsetfunc
 
         useEffect(() => {
@@ -201,7 +199,7 @@ const LandingPage = () => {
         // }, [timeNow, sunset])
         // <------------------------^^^^-------------------------------------------->
 
-
+        let count = 0
 
         // Fetch parking data
         const asyncFetch = async () => {
@@ -218,17 +216,19 @@ const LandingPage = () => {
                     },
                 );
                 setParkingState(newObj);
+                setOnline(true);
+                count = 0;
+
             } catch (err) {
                 // Tänne fetchaus virheet
                 console.log('asyncFetch error', err.message);
-<<<<<<< Updated upstream
-                setOnline(false);
-=======
+
                 count++;
                 if (count === 3) setOnline(false);
->>>>>>> Stashed changes
+
             }
         };
+
 
         // Fetch sunset data
 
