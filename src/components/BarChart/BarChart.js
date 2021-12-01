@@ -1,6 +1,7 @@
 import React from 'react';
 import {Chart} from 'react-google-charts';
 import {Skeleton} from '@mui/material';
+import '@fontsource/heebo';
 
 const BarChart = () => {
   return (
@@ -30,12 +31,15 @@ const BarChart = () => {
           options={{
             backgroundColor: '#f2f2f2',
             title: 'Edellisen päivän paikkatilanne',
+            titleTextStyle: {
+              fontName: 'Heebo'
+            },
             hAxis: {
-              title: '\0'
+              title: '\0',
             },
             vAxis: {
-              minValue: 0,
               maxValue: 100,
+              format: '#%'
             },
             legend: {position: 'none'}
           }
