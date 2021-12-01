@@ -252,7 +252,7 @@ const LandingPage = () => {
                 <Grid container>
                   <Grid item sm={6} height={'fit-content'}>
                     <Card elevation={5} id={'svgParkMapCard'}
-                          style={{position: 'relative'}}>
+                          style={{position: 'relative', marginBottom: 0}}>
                       <SvgParkMap object={parkingState}/>
                       <ErrorMessage online={online}/>
                     </Card>
@@ -316,7 +316,7 @@ const LandingPage = () => {
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                         </Grid>
-                        <Grid item xs={12} margin={'1rem 0'}>
+                        <Grid item xs={12} margin={'1rem 0 0 0'}>
                           <Stack direction={'row'} justifyContent={'space-between'}
                                  textAlign={'left'} margin={'0 1rem 1rem 1rem'}>
                             <Stack direction={'row'} alignItems={'flex-end'}>

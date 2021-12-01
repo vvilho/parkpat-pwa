@@ -1,9 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Chart} from 'react-google-charts';
 import {Skeleton} from '@mui/material';
 import '@fontsource/heebo';
 
 const BarChart = () => {
+  const [barData, setBarData] = useState([]);
+  useEffect(() => {
+    barDataFetch();
+  }, []);
+  const barDataFetch = async () => {
+    let data = []
+    try {
+      const response = await fetch('/data/metrici.json');
+      const json = await response.json();
+      const obj = Object.values(json);
+      console.log('new array', obj);
+      data = obj.map((x) => Math.round(x+3.7));
+      console.log('finaali array', data);
+      setBarData(data);
+    } catch (err) {
+      console.log('barDataFetch error', err.message);
+    }
+  };
   return (
       <Chart
           chartType={'ColumnChart'}
@@ -12,36 +30,42 @@ const BarChart = () => {
           loader={<Skeleton/>}
           data={[
             ['Kellonaika', '%'],
-            ['05', 20],
-            ['06', 10],
-            ['07', 30],
-            ['08', 70],
-            ['09', 90],
-            ['10', 100],
-            ['11', 100],
-            ['12', 100],
-            ['13', 85],
-            ['14', 100],
-            ['15', 80],
-            ['16', 50],
-            ['17', 30],
-            ['18', 5],
-            ['19', 0]
+            ['05', barData[5]],
+            ['06', barData[6]],
+            ['07', barData[7]],
+            ['08', barData[8]],
+            ['09', barData[9]],
+            ['10', barData[10]],
+            ['11', barData[11]],
+            ['12', barData[12]],
+            ['13', barData[13]],
+            ['14', barData[14]],
+            ['15', barData[15]],
+            ['16', barData[16]],
+            ['17', barData[17]],
+            ['18', barData[18]],
+            ['19', barData[19]],
           ]}
           options={{
             backgroundColor: '#f2f2f2',
+            bar: {groupWidth: '100%'},
+            chartArea: {
+              width: '80%',
+              height: '65%'
+            },
             title: 'Edellisen päivän paikkatilanne',
             titleTextStyle: {
-              fontName: 'Heebo'
+              fontName: 'Heebo',
+              fontSize: 20
             },
             hAxis: {
-              title: '\0',
+              title: 'Klo',
             },
             vAxis: {
               maxValue: 100,
-              format: '#%'
+              format: '#\'%\'',
             },
-            legend: {position: 'none'}
+            legend: {position: 'none'},
           }
           }
       />
