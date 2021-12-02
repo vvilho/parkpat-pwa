@@ -10,7 +10,7 @@ import {
   ThemeProvider,
   Typography,
   Divider,
-  Card, createStyles, Skeleton,
+  Card, createStyles, Skeleton, Drawer,
 } from '@mui/material';
 
 import SvgParkMap from '../components/SvgParkMap/SvgParkMap';
@@ -105,11 +105,18 @@ const LandingPage = () => {
       const [sunset, setSunset] = useState();
       const [sunrise, setSunrise] = useState();
       const [timeNow, setTimeNow] = useState();
+      const [openDrawer, setOpenDrawer] = useState(false);
       const [sunHasSet, setSunHasSet] = useState(false);
       const [isMobile, setIsMobile] = useState(false);
       const [online, setOnline] = useState(true);
       const [isForceFetching, setIsForceFetching] = useState(false);
 
+      const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' &&
+            (event.key === 'Tab' || event.key === 'Shift')) {
+        }
+        setOpenDrawer(open);
+      };
       // Initial call for fetch functions
       useEffect(() => {
         asyncFetch();
@@ -347,8 +354,15 @@ const LandingPage = () => {
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                         </Grid>
                         <Grid item style={{marginLeft: '1rem'}} xs={12}>
-                          <BarChart/>
+                          <Button onClick={toggleDrawer('bottom',
+                              true)}>Tilastot</Button>
                         </Grid>
+                        <Drawer
+                            anchor={'bottom'}
+                            open={openDrawer}
+                            onClose={toggleDrawer('bottom', false)}>
+                          <BarChart/>
+                        </Drawer>
                       </Grid>
                     </Grid>
 
