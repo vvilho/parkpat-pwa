@@ -20,6 +20,7 @@
     "react-content-loader": "^6.0.3",
     "react-digital-clock": "^0.1.2",
     "react-dom": "^17.0.2",
+    "react-google-charts": "^3.0.15",
     "react-inlinesvg": "^2.3.0",
     "react-live-clock": "^5.3.1",
     "react-moment": "^1.1.1",
