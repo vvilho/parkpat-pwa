@@ -353,8 +353,8 @@ const LandingPage = () => {
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                         </Grid>
-                        <Grid item style={{marginLeft: '1rem'}} xs={12}>
-                          <Button onClick={toggleDrawer('bottom',
+                        <Grid item style={{marginLeft: '1rem', paddingTop: '1rem'}} xs={12}>
+                          <Button variant={'outlined'} onClick={toggleDrawer('bottom',
                               true)}>Tilastot</Button>
                         </Grid>
                         <Drawer

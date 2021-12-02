@@ -1,8 +1,9 @@
-#svgParkMapCard{
+#svgParkMapCard {
     border-radius: 0;
     margin-bottom: 1rem;
 }
-#modalBox{
+
+#modalBox {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -14,62 +15,81 @@
     border-radius: 0.5rem;
     padding: 4px;
 }
-#parkContentGridContainer{
+
+#parkContentGridContainer {
     margin-top: 0;
 }
-#parkContentGridItem{
+
+#parkContentGridItem {
     margin-top: 0;
 }
-#freeSpacesNumber{
+
+#freeSpacesNumber {
     line-height: 2.8rem;
 }
 
-#clock span{
-        color: black;
+#clock span {
+    color: black;
 }
 
-#invaSpacesNumber{
+#invaSpacesNumber {
     line-height: 2.8rem;
 }
-#container{
+
+#container {
     align-items: center;
 }
+
+defs[id*="_ABSTRACT"] + g:first-child {
+    text-anchor: middle;
+    left: 50%;
+}
+
 @media screen and (min-width: 600px) {
-    #modalBox{
+    #modalBox {
         width: 40%;
 
     }
-    #container{
+
+    #container {
         display: flex;
     }
 }
+
 @media screen and (max-width: 599px) {
-    #container{
+    #container {
         align-items: unset;
     }
-    #svgParkMapCard{
+
+    #svgParkMapCard {
         width: 100vw;
         border-radius: 0 0 50px 50px;
         overflow: hidden;
     }
-    #parkContentGridContainer{
+
+    #parkContentGridContainer {
         margin: 0 0 2rem 0;
     }
-    #parkContentGridItem{
+
+    #parkContentGridItem {
         margin: 1rem 0 0 0;
     }
-    #freeSpacesNumber{
+
+    #freeSpacesNumber {
         line-height: 2.2rem;
     }
-    #invaSpacesNumber{
+
+    #invaSpacesNumber {
         line-height: 2.2rem;
     }
 }
+
 @media screen and (max-width: 680px) and (min-width: 600px) {
-    #invaSpacesText{
+    #invaSpacesText {
         font-size: 0.86rem;
     }
-    #freeSpacesText{
+
+    #freeSpacesText {
         font-size: 0.86rem;
     }
 }

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Chart} from 'react-google-charts';
-import {Container, Skeleton} from '@mui/material';
+import {Container, Skeleton, Typography} from '@mui/material';
 import '@fontsource/heebo';
 
 const BarChart = () => {
-  const [barData, setBarData] = useState([]);
+  const [barData, setBarData] = useState(
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   useEffect(() => {
     barDataFetch();
   }, []);
@@ -23,12 +24,13 @@ const BarChart = () => {
     }
   };
   return (
-      <Container disableGutters={true} sx={{margin: 0, padding: 0, overflow: 'hidden'}}>
+      <Container disableGutters={true}
+                 sx={{margin: 0, overflow: 'hidden', maxWidth: 'none !important', textAlign: 'center', backgroundColor: '#f2f2f2', padding: '1rem 0'}}>
+        <Typography variant={'h5'} fontFamily={'Heebo'}>Edellisen päivän paikkatilanne</Typography>
         <Chart
             chartType={'ColumnChart'}
             width={'100%'}
             height={'100%'}
-            loader={<Skeleton/>}
             data={[
               ['Kellonaika', '%'],
               ['05', barData[5]],
@@ -49,15 +51,15 @@ const BarChart = () => {
             ]}
             options={{
               backgroundColor: '#f2f2f2',
-              bar: {groupWidth: '100%'},
+              bar: {groupWidth: '93%'},
+              animation: {
+                startup: true,
+                duration: 700,
+                easing: 'out'
+              },
               chartArea: {
                 width: '80%',
-                height: '65%',
-              },
-              title: 'Edellisen päivän paikkatilanne',
-              titleTextStyle: {
-                fontName: 'Heebo',
-                fontSize: 20,
+                height: '60%',
               },
               hAxis: {
                 title: 'Klo',
