@@ -354,15 +354,16 @@ const LandingPage = () => {
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                         </Grid>
-                        <Grid item style={{marginLeft: '1rem', paddingTop: '1rem'}} xs={12}>
-                          <Button variant={'contained'} onClick={toggleDrawer('bottom',
-                              true)}>Edellisen arkipäivän tilastot</Button>
+                        <Grid item style={{marginLeft: '1rem', paddingTop: '2rem'}} xs={12}>
+                          <Button variant={'contained'} onClick={toggleDrawer(true)}>Edellisen arkipäivän tilastot</Button>
                         </Grid>
                         <SwipeableDrawer
                             anchor={'bottom'}
                             open={openDrawer}
                             onClose={toggleDrawer(false)}
-                            onOpen={toggleDrawer(true)}>
+                            onOpen={toggleDrawer(true)}
+                            hysteresis={0.3}
+                            disableSwipeToOpen={true}>
                           <BarChart/>
                         </SwipeableDrawer>
                       </Grid>

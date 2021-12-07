@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Chart} from 'react-google-charts';
-import {Container, Skeleton, Typography} from '@mui/material';
+import {Box, Container, Skeleton, Typography} from '@mui/material';
 import '@fontsource/heebo';
 
 const BarChart = () => {
@@ -28,7 +28,7 @@ const BarChart = () => {
   const [barColor, setBarColor] = useState(defaultColors);
 
   useEffect(() => {
-  }, [barColor]);
+  }, [barColor, barData]);
   useEffect(() => {
     barDataFetch();
     const date = new Date();
@@ -36,7 +36,6 @@ const BarChart = () => {
 
     if (hours <= 19 && hours >= 5) {
       setBarColor({...defaultColors, [hours]: 'DarkMagenta'});
-      console.log('osuu ikkunaan', barColor, hours);
     }
   }, []);
   const barDataFetch = async () => {
@@ -56,12 +55,15 @@ const BarChart = () => {
                    margin: 0,
                    overflow: 'hidden',
                    maxWidth: 'none !important',
+                   display: 'flex',
+                   flexDirection: 'column',
+                   alignItems: 'center',
                    textAlign: 'center',
                    backgroundColor: '#f2f2f2',
                    padding: '1rem 0',
                  }}>
-        <Typography variant={'h5'} fontFamily={'Heebo'}>Edellisen päivän
-          paikkatilanne</Typography>
+        <Box width='3rem' height='0.5rem' style={{backgroundColor: 'darkgrey', borderRadius: 3, marginBottom: '1rem'}}/>
+        <Typography variant={'h5'} fontFamily={'Heebo'}>Varatut paikat: {barData[24]}</Typography>
         <Chart
             chartType={'ColumnChart'}
             width={'100%'}

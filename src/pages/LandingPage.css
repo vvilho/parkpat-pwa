@@ -40,6 +40,10 @@
     align-items: center;
 }
 
+.MuiDrawer-paperAnchorBottom {
+    border-radius: 50px 50px 0 0;
+}
+
 defs[id*="_ABSTRACT"] + g:first-child {
     text-anchor: middle;
     left: 50%;
