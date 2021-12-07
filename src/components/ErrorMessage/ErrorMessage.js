@@ -1,4 +1,4 @@
-import {Box} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import React from 'react';
 
 const ErrorMessage = ({online}) => {
@@ -8,9 +8,14 @@ const ErrorMessage = ({online}) => {
       <Box id="errorMessageBox" position={'absolute'} width="100%" top="50%"
            left="50%" style={{
         backgroundColor: 'rgba(16,16,16,0.8)',
+        width: '100%',
+        height: '100%',
         transform: 'translate(-50%, -50%)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}>
-        <img src={'/giphy.gif'} width={'100%'}/>
+        <Typography variant={'h5'} color={'white'}>Toimii vain verkkoyhteydellä</Typography>
       </Box>
 
   );
