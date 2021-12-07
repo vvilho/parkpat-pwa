@@ -34,9 +34,9 @@ const BeenHereBeforeModal = () => {
                                     sx={{mt: 2, padding: '1rem'}}
                                     fontWeight={'bold'}>
 
-                            Parkkipaikka on vain koulun opettajille!!!! ParkkiPate Oy
+                            Parkkipaikka on vain kampuksen henkilökunnalle! ParkkiPate Oy
                             valvoo parkkipaikkaa ja
-                            sakottaa autoja joilla ei ole lupalappua.
+                            sakottaa luvattomia ajoneuvoja.
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
