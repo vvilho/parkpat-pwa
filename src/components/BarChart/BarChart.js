@@ -38,18 +38,14 @@ const BarChart = () => {
       setBarColor({...defaultColors, [hours]: 'DarkMagenta'});
       console.log('osuu ikkunaan', barColor, hours);
     }
-    console.log('barColor', barColor);
   }, []);
   const barDataFetch = async () => {
-    let data = [];
     try {
       const response = await fetch('/data/metrici.json');
       const json = await response.json();
       const obj = Object.values(json);
       console.log('new array', obj);
-      data = obj.map((x) => Math.round(x + 3.7));
-      console.log('finaali array', data);
-      setBarData(data);
+      setBarData(obj);
     } catch (err) {
       console.log('barDataFetch error', err.message);
     }

@@ -10,7 +10,7 @@ import {
   ThemeProvider,
   Typography,
   Divider,
-  Card, createStyles, Skeleton, Drawer,
+  Card, createStyles, Skeleton, Drawer, SwipeableDrawer,
 } from '@mui/material';
 
 import SvgParkMap from '../components/SvgParkMap/SvgParkMap';
@@ -111,9 +111,10 @@ const LandingPage = () => {
       const [online, setOnline] = useState(true);
       const [isForceFetching, setIsForceFetching] = useState(false);
 
-      const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' &&
-            (event.key === 'Tab' || event.key === 'Shift')) {
+      const toggleDrawer = (open) => (event) => {
+        if (event?.type === 'keydown' &&
+            (event?.key === 'Tab' || event?.key === 'Shift')) {
+          return;
         }
         setOpenDrawer(open);
       };
@@ -354,15 +355,16 @@ const LandingPage = () => {
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                         </Grid>
                         <Grid item style={{marginLeft: '1rem', paddingTop: '1rem'}} xs={12}>
-                          <Button variant={'outlined'} onClick={toggleDrawer('bottom',
-                              true)}>Tilastot</Button>
+                          <Button variant={'contained'} onClick={toggleDrawer('bottom',
+                              true)}>Edellisen arkipäivän tilastot</Button>
                         </Grid>
-                        <Drawer
+                        <SwipeableDrawer
                             anchor={'bottom'}
                             open={openDrawer}
-                            onClose={toggleDrawer('bottom', false)}>
+                            onClose={toggleDrawer(false)}
+                            onOpen={toggleDrawer(true)}>
                           <BarChart/>
-                        </Drawer>
+                        </SwipeableDrawer>
                       </Grid>
                     </Grid>
 
