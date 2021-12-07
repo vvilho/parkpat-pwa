@@ -20,6 +20,7 @@ import AccessibleIcon from '@mui/icons-material/Accessible';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import CloseIcon from '@mui/icons-material/Close';
 
 import './LandingPage.css';
 import SunsetChecker from '../components/SunsetChecker/SunsetChecker';
@@ -253,7 +254,6 @@ const LandingPage = () => {
       return (
           <Container id={'container'} disableGutters={screenWidth} maxWidth={'md'}
                      style={{width: '100vw', height: '100vh'}}>
-            <img src={'/giphy.gif'} style={{display: 'none'}}/>
             <ThemeProvider theme={theme}>
               <BeenHereBeforeModal/>
               <>
@@ -273,8 +273,8 @@ const LandingPage = () => {
                       <Grid item xs={12} id={'parkContentGridItem'}>
                         <Stack direction={'row'} justifyContent={'space-between'}
                                alignItems={'self-end'} margin={'0 1rem'}>
-                          <Typography variant="h7">Vapaat paikat
-                            ({online ? totalFreeSpaces : '?'})</Typography>
+                          <Typography variant="h7" style={{display: 'flex'}}>Vapaat paikat
+                            ({online ? totalFreeSpaces : <CloseIcon style={{fill: 'grey', fontSize: '1.3rem'}}/>})</Typography>
 
                           <Box display={'flex'} alignItems={'self-end'}
                                width={'6rem'} justifyContent={'end'}>
@@ -286,8 +286,9 @@ const LandingPage = () => {
                                     classes.rotateIcon :
                                     ''}/></Box> : <AccessTimeIcon/>}
                             <Typography variant={'h7'} id={'clock'}
+                                        style={{display: 'flex'}}
                                         onClick={forcedReloadOfPlaces}>
-                              {online ? <Clock hour12={false}/> : '?'}</Typography>
+                              {online ? <Clock hour12={false}/> : <CloseIcon style={{fill: 'grey'}}/>}</Typography>
 
                           </Box>
                         </Stack>
@@ -307,19 +308,20 @@ const LandingPage = () => {
                                 <Typography variant="h5"
                                             fontWeight={'bold'}
                                             id="invaSpacesTitle">Parkkipaikat</Typography>
-                                <Typography variant="h7" id="freeSpacesText"
-                                >{online ? freeSpacesText?.text : '-'}</Typography>
+                                <Typography variant="h7" style={{display: 'flex'}} id="freeSpacesText"
+                                >{online ? freeSpacesText?.text : <CloseIcon style={{fill: 'grey', fontSize: '1.3rem'}}/>}</Typography>
                               </Box>
                             </Stack>
 
                             <Box display={'flex'} alignItems={'flex-end'}>
                               <Typography variant="h2"
+                                          display={'flex'}
                                           color={online ?
                                               freeSpacesText?.style :
                                               'black'}
                                           id="freeSpacesNumber">{online ?
                                   freeNormalSpaces :
-                                  '?'}</Typography>
+                                  <CloseIcon style={{fill: 'grey'}} fontSize={'3.125rem'}/>}</Typography>
                             </Box>
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
@@ -338,18 +340,19 @@ const LandingPage = () => {
                                 <Typography variant="h5"
                                             fontWeight={'bold'}
                                             id="invaSpacesTitle">Invapaikat</Typography>
-                                <Typography variant="h7" id="invaSpacesText"
-                                >{online ? invaSpacesText?.text : '-'}</Typography>
+                                <Typography variant="h7" style={{display: 'flex'}} id="invaSpacesText"
+                                >{online ? invaSpacesText?.text : <CloseIcon style={{fill: 'grey', fontSize: '1.3rem'}}/>}</Typography>
                               </Box>
                             </Stack>
                             <Box display={'flex'} alignItems={'flex-end'}>
                               <Typography variant="h2"
+                                          display={'flex'}
                                           color={online ?
                                               invaSpacesText?.style :
                                               'black'}
                                           id="invaSpacesNumber">{online ?
                                   freeInvaSpaces :
-                                  '?'}</Typography>
+                                  <CloseIcon style={{fill: 'grey'}} fontSize={'3.125rem'}/>}</Typography>
                             </Box>
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>

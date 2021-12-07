@@ -15,7 +15,7 @@ const ErrorMessage = ({online}) => {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
-        <Typography variant={'h5'} color={'white'}>Toimii vain verkkoyhteydellä</Typography>
+        <Typography variant={'h5'} color={'white'} fontWeight={'bold'}>Toimii vain verkkoyhteydellä!</Typography>
       </Box>
 
   );
