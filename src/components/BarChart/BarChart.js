@@ -43,7 +43,9 @@ const BarChart = () => {
       const response = await fetch('/data/metrici.json');
       const json = await response.json();
       const obj = Object.values(json);
-      setBarData(obj);
+      const roundedObj = obj.map((x) => {if(typeof x === 'number') {return Math.round(x)} else {return x}});
+      console.log('barDataFetch roundedObj', roundedObj);
+      setBarData(roundedObj);
     } catch (err) {
       console.error('barDataFetch error', err.message);
     }
