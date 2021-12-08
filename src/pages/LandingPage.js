@@ -224,7 +224,7 @@ const LandingPage = () => {
 
         } catch (err) {
           // Tänne fetchaus virheet
-          console.log('asyncFetch error', err.message);
+          console.error('asyncFetch error', err.message);
 
           count++;
           if (count === 3) setOnline(false);
@@ -273,9 +273,14 @@ const LandingPage = () => {
                       <Grid item xs={12} id={'parkContentGridItem'}>
                         <Stack direction={'row'} justifyContent={'space-between'}
                                alignItems={'self-end'} margin={'0 1rem'}>
-                          <Typography variant="h7" style={{display: 'flex'}}>Vapaat paikat
-                            ({online ? totalFreeSpaces : <CloseIcon style={{fill: 'grey', fontSize: '1.3rem'}}/>})</Typography>
-
+                          <Typography variant="h7" style={{display: 'flex'}}>Vapaat
+                            paikat
+                            ({online ?
+                                totalFreeSpaces :
+                                <CloseIcon style={{
+                                  fill: 'grey',
+                                  fontSize: '1.3rem',
+                                }}/>})</Typography>
                           <Box display={'flex'} alignItems={'self-end'}
                                width={'6rem'} justifyContent={'end'}>
 
@@ -288,8 +293,9 @@ const LandingPage = () => {
                             <Typography variant={'h7'} id={'clock'}
                                         style={{display: 'flex'}}
                                         onClick={forcedReloadOfPlaces}>
-                              {online ? <Clock hour12={false}/> : <CloseIcon style={{fill: 'grey'}}/>}</Typography>
-
+                              {online ?
+                                  <Clock hour12={false}/> :
+                                  <CloseIcon style={{fill: 'grey'}}/>}</Typography>
                           </Box>
                         </Stack>
                       </Grid>
@@ -308,11 +314,16 @@ const LandingPage = () => {
                                 <Typography variant="h5"
                                             fontWeight={'bold'}
                                             id="invaSpacesTitle">Parkkipaikat</Typography>
-                                <Typography variant="h7" style={{display: 'flex'}} id="freeSpacesText"
-                                >{online ? freeSpacesText?.text : <CloseIcon style={{fill: 'grey', fontSize: '1.3rem'}}/>}</Typography>
+                                <Typography variant="h7" style={{display: 'flex'}}
+                                            id="freeSpacesText"
+                                >{online ?
+                                    freeSpacesText?.text :
+                                    <CloseIcon style={{
+                                      fill: 'grey',
+                                      fontSize: '1.3rem',
+                                    }}/>}</Typography>
                               </Box>
                             </Stack>
-
                             <Box display={'flex'} alignItems={'flex-end'}>
                               <Typography variant="h2"
                                           display={'flex'}
@@ -321,7 +332,8 @@ const LandingPage = () => {
                                               'black'}
                                           id="freeSpacesNumber">{online ?
                                   freeNormalSpaces :
-                                  <CloseIcon style={{fill: 'grey'}} fontSize={'3.125rem'}/>}</Typography>
+                                  <CloseIcon style={{fill: 'grey'}}
+                                             fontSize={'3.125rem'}/>}</Typography>
                             </Box>
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
@@ -340,8 +352,14 @@ const LandingPage = () => {
                                 <Typography variant="h5"
                                             fontWeight={'bold'}
                                             id="invaSpacesTitle">Invapaikat</Typography>
-                                <Typography variant="h7" style={{display: 'flex'}} id="invaSpacesText"
-                                >{online ? invaSpacesText?.text : <CloseIcon style={{fill: 'grey', fontSize: '1.3rem'}}/>}</Typography>
+                                <Typography variant="h7" style={{display: 'flex'}}
+                                            id="invaSpacesText"
+                                >{online ?
+                                    invaSpacesText?.text :
+                                    <CloseIcon style={{
+                                      fill: 'grey',
+                                      fontSize: '1.3rem',
+                                    }}/>}</Typography>
                               </Box>
                             </Stack>
                             <Box display={'flex'} alignItems={'flex-end'}>
@@ -352,13 +370,17 @@ const LandingPage = () => {
                                               'black'}
                                           id="invaSpacesNumber">{online ?
                                   freeInvaSpaces :
-                                  <CloseIcon style={{fill: 'grey'}} fontSize={'3.125rem'}/>}</Typography>
+                                  <CloseIcon style={{fill: 'grey'}}
+                                             fontSize={'3.125rem'}/>}</Typography>
                             </Box>
                           </Stack>
                           <Divider variant={isMobile ? 'fullWidth' : 'middle'}/>
                         </Grid>
-                        <Grid item style={{marginLeft: '1rem', paddingTop: '2rem'}} xs={12}>
-                          <Button variant={'contained'} onClick={toggleDrawer(true)}>Edellisen arkipäivän tilastot</Button>
+                        <Grid item style={{marginLeft: '1rem', paddingTop: '2rem'}}
+                              xs={12}>
+                          <Button variant={'contained'}
+                                  onClick={toggleDrawer(true)}>Edellisen arkipäivän
+                            tilastot</Button>
                         </Grid>
                         <SwipeableDrawer
                             anchor={'bottom'}
@@ -371,19 +393,15 @@ const LandingPage = () => {
                         </SwipeableDrawer>
                       </Grid>
                     </Grid>
-
                     {(!isMobile && sunsetFuncOn) &&
                     <ActiveTimeTracker sunset={sunset} sunrise={sunrise}
                                        isMobile={isMobile}/>}
                   </Grid>
                 </Grid>
               </>
-
             </ThemeProvider>
           </Container>
-      )
-          ;
-    }
-;
+      );
+    };
 
 export default LandingPage;

@@ -43,10 +43,9 @@ const BarChart = () => {
       const response = await fetch('/data/metrici.json');
       const json = await response.json();
       const obj = Object.values(json);
-      console.log('new array', obj);
       setBarData(obj);
     } catch (err) {
-      console.log('barDataFetch error', err.message);
+      console.error('barDataFetch error', err.message);
     }
   };
   return (
