@@ -44,7 +44,6 @@ const BarChart = () => {
       const json = await response.json();
       const obj = Object.values(json);
       const roundedObj = obj.map((x) => {if(typeof x === 'number') {return Math.round(x)} else {return x}});
-      console.log('barDataFetch roundedObj', roundedObj);
       setBarData(roundedObj);
     } catch (err) {
       console.error('barDataFetch error', err.message);
