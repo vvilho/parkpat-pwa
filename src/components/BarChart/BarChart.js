@@ -43,7 +43,13 @@ const BarChart = () => {
       const response = await fetch('/data/metrici.json');
       const json = await response.json();
       const obj = Object.values(json);
-      const roundedObj = obj.map((x) => {if(typeof x === 'number') {return Math.round(x)} else {return x}});
+      const roundedObj = obj.map((x) => {
+        if (typeof x === 'number') {
+          return Math.round(x);
+        } else {
+          return x;
+        }
+      });
       setBarData(roundedObj);
     } catch (err) {
       console.error('barDataFetch error', err.message);
@@ -62,8 +68,16 @@ const BarChart = () => {
                    backgroundColor: '#f2f2f2',
                    padding: '1rem 0',
                  }}>
-        <Box width='3rem' height='0.5rem' style={{backgroundColor: 'darkgrey', borderRadius: 3, marginBottom: '1rem'}}/>
-        <Typography variant={'h5'} fontWeight={'bold'} display={'flex'} fontFamily={'Heebo'}>Varatut paikat: {barData[24] === undefined ? <Skeleton width='6.2rem' height='1rem'/> : barData[24]}</Typography>
+        <Box width="3rem" height="0.5rem" style={{
+          backgroundColor: 'darkgrey',
+          borderRadius: 3,
+          marginBottom: '1rem',
+        }}/>
+        <Typography variant={'h5'} fontWeight={'bold'} display={'flex'}
+                    fontFamily={'Heebo'}>Varatut paikat: {barData[24] ===
+        undefined ?
+            <Skeleton width="6.2rem" height="1rem"/> :
+            barData[24]}</Typography>
         <Chart
             chartType={'ColumnChart'}
             width={'100%'}
