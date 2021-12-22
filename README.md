@@ -5,7 +5,7 @@ Metropolian Karamalmin kampuksen parkkipaikan seurantaan tehty sovellus.
 
 
 
-[Linkki toimivaan sovellukseen](https://jontun-media-serveri.northeurope.cloudapp.azure.com/ "Sample app") 
+[Linkki toimivaan sovellukseen](https://karaparkki.fi "Linkki sovellukseen") 
 
 Asenna puhelimeesi PWA 
 
