@@ -5,6 +5,7 @@ Metropolian Karamalmin kampuksen parkkipaikan seurantaan tehty sovellus.
 
 
 
+[Linkki toimivaan sovellukseen](https://karaparkki.fi "Linkki sovellukseen")
 [Linkki toimivaan sovellukseen](https://karaparkki.fi "Linkki sovellukseen"){:target="_blank" rel="noopener"}
 
 Asenna puhelimeesi PWA 
