@@ -6,7 +6,7 @@ Metropolian Karamalmin kampuksen parkkipaikan seurantaan tehty sovellus.
 PWA made for Metropolia Karamalmis campus to check available parking spot situation.
 
 App is not functioning anymore as we don't have acces to the parking lot camera anymore. 
-RIP ParkkiPirkko
+RIP ParkPat :(
 
 App was running under www.karaparkki.fi domain.
 
