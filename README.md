@@ -1,4 +1,5 @@
 # ParkPat PWA - AI-powered parking place detector app
+![image](https://github.com/vvilho/parkpat-pwa/assets/63448548/0b044a39-2918-415d-8bd8-773248a62357)
 
 ## Overview
 ParkPat is a Progressive Web App (PWA) developed for monitoring the parking situation at the Metropolia University of Applied Sciences' Karamalmi campus. It was designed to provide real-time information about available parking spots, leveraging the campus's parking lot camera and utilizing Metrici's AI software for parking place detection.
@@ -29,5 +30,4 @@ The application is currently not live due to the loss of access to the parking l
 ## Screenshots
 ![ParkPat Screenshot](https://user-images.githubusercontent.com/63448548/189776851-ec4a00c7-caac-4bee-b098-278eab02281c.png)
 
-![ParkPat Logo](https://user-images.githubusercontent.com/63448548/143406316-8ccdf0d9-045a-4a75-9a9e-b3ffc57c1e24.png)
 
