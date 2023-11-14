@@ -31,5 +31,3 @@ The application is currently not live due to the loss of access to the parking l
 
 ![ParkPat Logo](https://user-images.githubusercontent.com/63448548/143406316-8ccdf0d9-045a-4a75-9a9e-b3ffc57c1e24.png)
 
-## Contact
-For more information or inquiries about the project, feel free to contact [Your Name].
