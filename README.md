@@ -25,7 +25,7 @@ ParkPat is a Progressive Web App (PWA) developed for monitoring the parking situ
 A special thank you to Metrici for their support in this project. **Vlad Georgescu** from Metrici generously provided a free license for the METRICI PARKING PLACE DETECTOR software, which was instrumental in the development of ParkPat.
 
 ## Project Status
-The application is currently not live due to the loss of access to the parking lot camera. It was previously hosted at www.karaparkki.fi.
+The application is currently not live due to the loss of access to the parking lot camera. It was previously hosted at karaparkki.fi.
 
 ## Screenshots
 ![ParkPat Screenshot](https://user-images.githubusercontent.com/63448548/189776851-ec4a00c7-caac-4bee-b098-278eab02281c.png)
